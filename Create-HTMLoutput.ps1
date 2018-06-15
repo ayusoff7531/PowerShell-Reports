@@ -1,3 +1,6 @@
+#-------------------------------------------------------------------------------------
+#This function will create the precontent, before the table that contains the data
+#-------------------------------------------------------------------------------------
 function CreateHeader{
 
     [CmdletBinding()]
@@ -23,6 +26,9 @@ If contact is not listed, please check the inventory spreadsheet.<br><br>
     $text
 }#end function
 
+#-------------------------------------------------------------------------------------
+#This function will create the postcontent, after the table that contains the data
+#-------------------------------------------------------------------------------------
 function CreateFooter{
 
     [CmdletBinding()]
@@ -43,7 +49,9 @@ Total script time was $([math]::Round($((New-TimeSpan -Start $startTime  -End $e
     $text
 }#end function
 
-
+#-------------------------------------------------------------------------------------
+#This function will apply the styles to the webpage. It will be in the <head> tags
+#-------------------------------------------------------------------------------------
 function ApplyStyle1{
     [CmdletBinding()]
     param()
@@ -51,10 +59,15 @@ function ApplyStyle1{
     $style = @"
 <style>
     TABLE{border-width: 1px;border-style: solid;border-color: black;border-collapse: collapse;}
-    TH{border-width: 1px;padding: 0px;border-style: solid;border-color: black;padding: 8px;text-align: left;background-color:#d1f2eb;}
+    TH{border-width: 1px;padding: 0px;border-style: solid;border-color: black;padding: 8px;text-align: left; background-color:#dae1fd; color: #000000;}
     TD{border-width: 1px;padding: 0px;border-style: solid;border-color: black; padding: 8px;text-align: left;}
-    tr:hover{background-color:#e5e7e9;}
+    tr:hover{background-color:#e5e7e9; color: #0066cc;}
+    h2{color: #0066cc;}
+    body{font-family: Verdana, Helvetica, Arial, sans-serif;}
 </style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 "@
 
     #return the style text
@@ -62,6 +75,10 @@ function ApplyStyle1{
 
 }#end function
 
+#-------------------------------------------------------------------------------------
+#This function will create all the html tags on the top part of the webpage.
+#It is used by Report-MissingBackup & Report-MissingLogBackup
+#-------------------------------------------------------------------------------------
 function CreateHTMLhead{
     [CmdletBinding()]
     param(
@@ -90,10 +107,15 @@ function CreateHTMLhead{
     div.backupNotRequired {display: none;}
 
     TABLE{border-width: 1px;border-style: solid;border-color: black;border-collapse: collapse;}
-    TH{border-width: 1px;padding: 0px;border-style: solid;border-color: black;padding: 8px;text-align: left;background-color:#d1f2eb;}
+    TH{border-width: 1px;padding: 0px;border-style: solid;border-color: black;padding: 8px;text-align: left;background-color:#dae1fd; color: #000000;}
     TD{border-width: 1px;padding: 0px;border-style: solid;border-color: black; padding: 8px;text-align: left;}
-    tr:hover{background-color:#e5e7e9;}
+    tr:hover{background-color:#e5e7e9; color: #0066cc;}
+    h2{color: #0066cc;}
+    body{font-family: Verdana, Helvetica, Arial, sans-serif;}
 </style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
@@ -107,6 +129,9 @@ function CreateHTMLhead{
 
 }#end function
 
+#-------------------------------------------------------------------------------------
+#This function will close the html body
+#-------------------------------------------------------------------------------------
 function CloseHTMLbody{
     [CmdletBinding()]
     param()
@@ -120,7 +145,10 @@ function CloseHTMLbody{
     $closingTags
 }#end function
 
-
+#-------------------------------------------------------------------------------------
+#This function will create a table for missing backup & missing log backup reports.
+#The table is for the databases that require to be backed up
+#-------------------------------------------------------------------------------------
 function CreateRequiredBackupTable{
     [CmdletBinding()]
     param(
@@ -169,6 +197,10 @@ function CreateRequiredBackupTable{
 
 }#end function
 
+#-------------------------------------------------------------------------------------
+#This function will create a table for missing backup & missing log backup reports.
+#The table is for the databases that DO NOT require to be backed up
+#-------------------------------------------------------------------------------------
 function CreateNotRequiredBackupTable{
     [CmdletBinding()]
     param(
